@@ -6,7 +6,7 @@
 /*   By: gkryszcz <gkryszcz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/17 12:37:32 by gkryszcz          #+#    #+#             */
-/*   Updated: 2025/09/17 12:53:59 by gkryszcz         ###   ########.fr       */
+/*   Updated: 2025/09/17 16:02:50 by gkryszcz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,24 +20,123 @@
 	
 
 // }
+
+// void draw_triangle(int center, int side_len)
+// {
+	
+// }
+
+// int close(int keycode, t_data *wind)
+// {
+// 	mlx_destroy_window(wind->mlx, )
+// }
+// bad implementation, but works
+void draw_circle(t_data img,int x, int y,int size)
+{
+	int i;
+	int j;
+	// int distx;
+	// int disty;
+	
+	i = 0;
+	while (i <= size * 2)
+	{
+		j = 0;
+		while (j <= size * 2)
+		{
+			int dist = sqrt((i - size) * (i - size) + (j - size) * (j - size));
+			if (dist < size)
+			{
+				opt_mlx_pixel_put(&img, i + x, j + y, 0x00FF0000);
+			}
+			j++;
+		}
+		i++;
+	}
+}
+
+// void draw_full_circle(t_data img,int x, int y, int size)
+// {
+	
+// }
+
+void draw_square(t_data img,int x,int y,int size)
+{
+	int i;
+	int j;
+	
+	i = x;
+	j = y;
+		while(i < x + size)
+		{
+			opt_mlx_pixel_put(&img,i,j,0x0000FF00);
+			printf("hej");
+			i++;
+		}
+		printf("%c",'\n');
+		while(j < y + size)
+		{
+			opt_mlx_pixel_put(&img,i,j,0x0000FF);
+			printf("hej2");
+			j++;
+		}
+		printf("%c",'\n');
+		while(i > x)
+		{
+			opt_mlx_pixel_put(&img,i,j,0x00FF0000);
+			printf("hej3");
+			i--;
+		}
+		printf("%c",'\n');
+		while(j > y)
+		{
+			opt_mlx_pixel_put(&img,i,j,0x00FFFFFF);
+			printf("hej4");
+			j--;
+		}
+		printf("%c",'\n');
+}
+
+void draw_random_texture(t_data img)
+{
+	int i;
+	int j;
+	int lol;
+	
+	i = 200;
+	j = 0;
+	lol = 0;
+
+	while(lol < 600)
+	{
+		while(j < 500)
+		{
+			opt_mlx_pixel_put(&img,i,j,0x0000FF00);
+			i++;
+			j++;
+		}
+		while(j > 0)
+		{
+			opt_mlx_pixel_put(&img,i,j,0x00FF0000);
+			i++;
+			j--;
+		}
+		lol++;
+	}
+}
 int	main()
 {
 	void	*mlx_conn;
 	void	*mlx_window;
 	t_data img;
-	int i;
-	int j;
-	int lol;
+
 	int middlex;
 	int middley;
 	int circle;
 	int radius;
 	// double PI = 3.1415926535;
-	double x1,y1;
 
-	i = 200;
-	j = 0;
-	lol = 0;
+	
 	circle = 0;
 	radius = 100;
 	mlx_conn = mlx_init();
@@ -47,42 +146,13 @@ int	main()
 	mlx_window = mlx_new_window(mlx_conn,HEIGHT,WIDTH,"Fractol");
 	img.img = mlx_new_image(mlx_conn,HEIGHT,WIDTH);
 	img.addr = mlx_get_data_addr(img.img, &img.bits_per_pixel, &img.line_len, &img.endian);
-	// while (i <100)
-	// {
-	// 	opt_mlx_pixel_put(&img,i,j,0x00FF0000);
-	// 	i++;
-	// 	j++;
-	// }
-	// while(i >0)
-	// {
-	// 	opt_mlx_pixel_put(&img,i,j,0x000000FF);
-	// 	i--;
-	// 	j++;
-	// }
+	
 	middley = 600;
 	middlex = 400;
 
-	while(lol < 600)
-	{
-			while(j < 500)
-		{
-			x1 = i;
-			y1 = j;
-			opt_mlx_pixel_put(&img,x1,y1,0x000000FF);
-			i++;
-			j++;
-		}
-		while(j > 0)
-		{
-			x1 = i;
-			y1 = j;
-			opt_mlx_pixel_put(&img,x1,y1,0x00FF0000);
-			i++;
-			j--;
-		}
-		lol++;
-	}
-
+	draw_random_texture(img);
+	// draw_square(img,100,100, 50);
+	// draw_circle(img,500,500,100);
 	// if (NULL == mlx_window)
 	// {
 	// 	mlx_destroy_display(mlx_conn);

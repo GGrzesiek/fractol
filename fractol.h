@@ -6,11 +6,12 @@
 /*   By: gkryszcz <gkryszcz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/04 14:36:41 by gkryszcz          #+#    #+#             */
-/*   Updated: 2025/08/04 14:46:27 by gkryszcz         ###   ########.fr       */
+/*   Updated: 2025/08/07 10:53:56 by gkryszcz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "mlx_linux/mlx.h"
+#include <math.h>
 
 typedef struct s_data
 {

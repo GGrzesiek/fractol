@@ -6,7 +6,7 @@
 /*   By: gkryszcz <gkryszcz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/17 12:37:32 by gkryszcz          #+#    #+#             */
-/*   Updated: 2025/09/17 16:02:50 by gkryszcz         ###   ########.fr       */
+/*   Updated: 2025/09/18 12:21:19 by gkryszcz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,28 +70,24 @@ void draw_square(t_data img,int x,int y,int size)
 		while(i < x + size)
 		{
 			opt_mlx_pixel_put(&img,i,j,0x0000FF00);
-			printf("hej");
 			i++;
 		}
 		printf("%c",'\n');
 		while(j < y + size)
 		{
-			opt_mlx_pixel_put(&img,i,j,0x0000FF);
-			printf("hej2");
+			opt_mlx_pixel_put(&img,i,j,0x000000FF);
 			j++;
 		}
 		printf("%c",'\n');
 		while(i > x)
 		{
 			opt_mlx_pixel_put(&img,i,j,0x00FF0000);
-			printf("hej3");
 			i--;
 		}
 		printf("%c",'\n');
 		while(j > y)
 		{
 			opt_mlx_pixel_put(&img,i,j,0x00FFFFFF);
-			printf("hej4");
 			j--;
 		}
 		printf("%c",'\n');
@@ -124,10 +120,16 @@ void draw_random_texture(t_data img)
 		lol++;
 	}
 }
+int close( t_vars *vars)
+{
+	mlx_destroy_window(vars->mlx,vars->win);
+	return (0);
+}
 int	main()
 {
-	void	*mlx_conn;
-	void	*mlx_window;
+	// void	*mlx_conn;
+	// void	*mlx_window;
+	t_vars vars;
 	t_data img;
 
 	int middlex;
@@ -139,29 +141,30 @@ int	main()
 	
 	circle = 0;
 	radius = 100;
-	mlx_conn = mlx_init();
-	if (NULL == mlx_conn)
+	vars.mlx = mlx_init();
+	if (NULL == vars.mlx)
 		return (1);
 
-	mlx_window = mlx_new_window(mlx_conn,HEIGHT,WIDTH,"Fractol");
-	img.img = mlx_new_image(mlx_conn,HEIGHT,WIDTH);
+	vars.win = mlx_new_window(vars.mlx,HEIGHT,WIDTH,"Fractol");
+	img.img = mlx_new_image(vars.mlx,HEIGHT,WIDTH);
 	img.addr = mlx_get_data_addr(img.img, &img.bits_per_pixel, &img.line_len, &img.endian);
 	
 	middley = 600;
 	middlex = 400;
 
 	draw_random_texture(img);
-	// draw_square(img,100,100, 50);
-	// draw_circle(img,500,500,100);
+	draw_square(img,100,100, 50);
+	draw_circle(img,500,500,100);
 	// if (NULL == mlx_window)
 	// {
 	// 	mlx_destroy_display(mlx_conn);
 	// 	free(mlx_conn);
 	// 	return(1);
 	// }
-	mlx_put_image_to_window(mlx_conn,mlx_window,img.img,0,0);
-	mlx_loop(mlx_conn);
-	mlx_destroy_display(mlx_conn);
-	free(mlx_conn);
+	mlx_put_image_to_window(vars.mlx,vars.win,img.img,0,0);
+	mlx_hook(vars.win,2, 1L<<0,close,&vars);
+	mlx_loop(vars.mlx);
+	mlx_destroy_display(vars.mlx);
+	free(vars.mlx);
 	return 0;
 }

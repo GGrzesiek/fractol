@@ -6,7 +6,7 @@
 /*   By: gkryszcz <gkryszcz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/04 14:36:41 by gkryszcz          #+#    #+#             */
-/*   Updated: 2025/09/17 13:19:06 by gkryszcz         ###   ########.fr       */
+/*   Updated: 2025/09/18 12:17:36 by gkryszcz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,12 @@ typedef struct s_data
 	int	line_len;
 	int	endian;
 }	t_data;	
+
+typedef struct s_vars
+{
+	void *mlx;
+	void *win;
+}	t_vars;
 
 void opt_mlx_pixel_put(t_data *data, int x, int y,int color)
 {

@@ -6,7 +6,7 @@
 /*   By: gkryszcz <gkryszcz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/17 12:37:32 by gkryszcz          #+#    #+#             */
-/*   Updated: 2025/09/18 12:21:19 by gkryszcz         ###   ########.fr       */
+/*   Updated: 2025/10/01 12:42:46 by gkryszcz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -107,23 +107,31 @@ void draw_random_texture(t_data img)
 	{
 		while(j < 500)
 		{
-			opt_mlx_pixel_put(&img,i,j,0x0000FF00);
+			opt_mlx_pixel_put(&img,i,j,0x0000FF00+i);
 			i++;
 			j++;
 		}
 		while(j > 0)
 		{
-			opt_mlx_pixel_put(&img,i,j,0x00FF0000);
+			opt_mlx_pixel_put(&img,i,j,0x00FF0000+i);
 			i++;
 			j--;
 		}
 		lol++;
 	}
 }
-int close( t_vars *vars)
+int handle_keypress(int keycode, void *param)
 {
-	mlx_destroy_window(vars->mlx,vars->win);
-	return (0);
+    t_vars *vars = (t_vars *)param;
+    (void)vars;
+    // printf("Key pressed: %d\n", keycode);
+    /* Escape on X11 is 65307 */
+    if (keycode == 65307)
+    {
+        mlx_destroy_window(vars->mlx, vars->win);
+        exit(0);
+    }
+    return (0);
 }
 int	main()
 {
@@ -146,6 +154,9 @@ int	main()
 		return (1);
 
 	vars.win = mlx_new_window(vars.mlx,HEIGHT,WIDTH,"Fractol");
+	if(!vars.win)
+		return (1);
+	
 	img.img = mlx_new_image(vars.mlx,HEIGHT,WIDTH);
 	img.addr = mlx_get_data_addr(img.img, &img.bits_per_pixel, &img.line_len, &img.endian);
 	
@@ -153,8 +164,8 @@ int	main()
 	middlex = 400;
 
 	draw_random_texture(img);
-	draw_square(img,100,100, 50);
-	draw_circle(img,500,500,100);
+	// draw_square(img,100,100, 50);
+	// draw_circle(img,500,500,100);
 	// if (NULL == mlx_window)
 	// {
 	// 	mlx_destroy_display(mlx_conn);
@@ -162,7 +173,8 @@ int	main()
 	// 	return(1);
 	// }
 	mlx_put_image_to_window(vars.mlx,vars.win,img.img,0,0);
-	mlx_hook(vars.win,2, 1L<<0,close,&vars);
+	// mlx_hook(vars.win,2, 1L<<0,close,&vars);
+	mlx_hook(vars.win, 2, (1L << 0), handle_keypress, &vars);
 	mlx_loop(vars.mlx);
 	mlx_destroy_display(vars.mlx);
 	free(vars.mlx);

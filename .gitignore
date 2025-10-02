@@ -3,3 +3,4 @@ a.out
 fractol
 *.o
 test.c
+.vscode

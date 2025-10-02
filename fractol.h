@@ -6,13 +6,14 @@
 /*   By: gkryszcz <gkryszcz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/04 14:36:41 by gkryszcz          #+#    #+#             */
-/*   Updated: 2025/09/18 12:17:36 by gkryszcz         ###   ########.fr       */
+/*   Updated: 2025/10/02 16:23:47 by gkryszcz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "mlx_linux/mlx.h"
 #include <math.h>
 #include <stdio.h>
+#include <stdlib.h>
 
 typedef struct s_data
 {
@@ -29,10 +30,11 @@ typedef struct s_vars
 	void *win;
 }	t_vars;
 
-void opt_mlx_pixel_put(t_data *data, int x, int y,int color)
-{
-	char *dst;
 
-	dst = data->addr + (y * data->line_len + x * (data->bits_per_pixel / 8));
-	*(unsigned int *)dst = color;
-}
+
+void draw_circle(t_data img,int x, int y,int size);
+void draw_square(t_data img,int x,int y,int size);
+void draw_random_texture(t_data img);
+int handle_keypress(int keycode, void *param);
+void opt_mlx_pixel_put(t_data *data, int x, int y,int color);
+int render_next_frame(t_data *image);

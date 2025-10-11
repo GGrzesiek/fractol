@@ -2,7 +2,7 @@ NAME = fractol
 CC = cc
 CFLAGS = -Wall -Wextra -Werror
 
-SRCS = main.c draw.c
+SRCS = main.c fractal.c render.c color.c events.c utils.c
 
 OBJS = $(SRCS:.c=.o)
 

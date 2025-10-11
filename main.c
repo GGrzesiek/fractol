@@ -3,97 +3,80 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gkryszcz <gkryszcz@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ggrzesiek <ggrzesiek@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/17 12:37:32 by gkryszcz          #+#    #+#             */
-/*   Updated: 2025/10/02 17:14:14 by gkryszcz         ###   ########.fr       */
+/*   Updated: 2025/10/11 08:24:19 by ggrzesiek        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fractol.h"
-#define WIDTH	1920
-#define HEIGHT	1080
-
-// int *fibb()
-// {
-	
-
-// }
-
-// int close(int keycode, t_data *wind)
-// {
-// 	mlx_destroy_window(wind->mlx, )
-// }
-// bad implementation, but works
-
-void opt_mlx_pixel_put(t_data *data, int x, int y,int color)
+/*
+	./fractol mandelbrot
+	./fractol julia -0.7 0.27015
+	./fractol julia -0.4 0.6
+	./fractol julia 0.285 0.01
+*/
+void init_fractal(t_fractal *f, int type)
 {
-	char *dst;
-
-	dst = data->addr + (y * data->line_len + x * (data->bits_per_pixel / 8));
-	*(unsigned int *)dst = color;
-}
-
-int handle_keypress(int keycode, void *param)
-{
-    t_vars *vars = (t_vars *)param;
-    (void)vars;
-    // printf("Key pressed: %d\n", keycode);
-    /* Escape on X11 is 65307 */
-    if (keycode == 65307)
-    {
-        mlx_destroy_window(vars->mlx, vars->win);
-        exit(0);
-    }
-    return (0);
-}
-
-int	main()
-{
-	t_vars vars;
-	t_data img;
-
-	int middlex;
-	int middley;
-	int radius;
-	// double PI = 3.1415926535;
-
-	radius = 100;
-	vars.mlx = mlx_init();
-	if (NULL == vars.mlx)
-		return (1);
-
-	vars.win = mlx_new_window(vars.mlx,HEIGHT,WIDTH,"Fractol");
-	if(!vars.win)
+	f->type = type;
+	f->zoom = 1.0;
+	f->offset_x = 0.0;
+	f->offset_x = 0.0;
+	f->max_iter = MAX_ITER;
+	f->color_shift = 0;
+	if(type == JULIA)
 	{
-		mlx_destroy_display(vars.mlx);
-		free(vars.win);
+		f->julia_c.r = -0.7;
+		f->julia_c.i = 0.27015;
+	}
+}
+
+void cleanup(t_fractal *f)
+{
+	if(f->img.img)
+		mlx_destroy_image(f->mlx, f->img.img);
+	if(f->win)
+		mlx_destroy_window(f->mlx, f->win);
+	if (f->mlx)
+	{
+		mlx_destroy_display(f->mlx);
+		free(f->mlx);
+	}
+}
+
+int handle_close(t_fractal *f)
+{
+	cleanup(f);
+	exit(0);
+	return(0);
+}
+
+int	main(int argc, char **argv)
+{
+	t_fractal f;
+	if(!parse_args(argc,argv,&f))
+	{
+		print_usage();
+		return(1);
+	}
+	f.mlx = mlx_init();
+	if (!f.mlx)
+		return(1);
+	f.win = mlx_new_window(f.mlx, WIDTH, HEIGHT, "Fractol");
+	if(!f.win)
+	{
+		mlx_destroy_display(f.mlx);
+		free(f.win);
 		return (1);
 	}
-	
-	img.img = mlx_new_image(vars.mlx,HEIGHT,WIDTH);
-	img.addr = mlx_get_data_addr(img.img, &img.bits_per_pixel, &img.line_len, &img.endian);
-	
-	middley = 600;
-	middlex = 400;
-
-	// draw_random_texture(img);
-	draw_square(img,middlex+200,middley, radius);
-	// draw_circle(img,middlex+200,middley,radius);
-	// if (NULL == mlx_window)
-	// {
-	// 	mlx_destroy_display(mlx_conn);
-	// 	free(mlx_conn);
-	// 	return(1);
-	// }
-	// mlx_hook(vars.win,2, 1L<<0,close,&vars);
-	mlx_hook(vars.win, 2, (1L << 0), handle_keypress, &vars);
-	
-	mlx_loop_hook(vars.mlx, render_next_frame, &img);
-	mlx_put_image_to_window(vars.mlx,vars.win,img.img,0,0);
-	mlx_loop(vars.mlx);
-	mlx_destroy_window(vars.mlx, vars.win);
-	mlx_destroy_display(vars.mlx);
-	free(vars.mlx);
+	f.img.img = mlx_new_image(f.mlx,HEIGHT,WIDTH);
+	f.img.addr = mlx_get_data_addr(f.img.img, &f.img.bits_per_pixel, &f.img.line_len, &f.img.endian);
+	render_fractal(&f);
+	mlx_put_image_to_window(f.mlx,f.win,f.img.img,0,0);
+	mlx_hook(f.win, 2, (1L << 0), handle_key, &f);
+	mlx_hook(f.win, 4, (1L << 2), handle_mouse, &f);
+	mlx_hook(f.win, 17, 0, handle_close, &f);
+	mlx_loop(f.mlx);
 	return 0;
 }

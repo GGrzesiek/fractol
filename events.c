@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   events.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gkryszcz <gkryszcz@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ggrzesiek <ggrzesiek@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/07 14:15:47 by ggrzesiek         #+#    #+#             */
-/*   Updated: 2025/10/11 12:28:06 by gkryszcz         ###   ########.fr       */
+/*   Updated: 2025/10/21 11:23:13 by ggrzesiek        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,4 +58,5 @@ void	print_usage(void)
 	ft_putstr_fd("Usage:\n", 1);
 	ft_putstr_fd(" ./fractol mandelbrot\n", 1);
 	ft_putstr_fd(" ./fractol julia <real> <imaginary>\n", 1);
+	ft_putstr_fd(" ./fractol tricorn\n", 1);
 }

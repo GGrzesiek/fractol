@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gkryszcz <gkryszcz@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ggrzesiek <ggrzesiek@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/07 14:15:49 by ggrzesiek         #+#    #+#             */
-/*   Updated: 2025/10/11 10:52:53 by gkryszcz         ###   ########.fr       */
+/*   Updated: 2025/10/21 11:32:59 by ggrzesiek        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,20 +76,23 @@ int	parse_args(int argc, char **argv, t_fractal *f)
 {
 	if (argc < 2)
 		return (0);
-	if (ft_strcmp(argv[1], "mandelbrot") == 0)
+	if (ft_strcmp(argv[1], "mandelbrot") == 0 && argc == 2)
 	{
-		if (argc != 2)
-			return (0);
 		init_fractal(f, MANDELBROT);
 		return (1);
 	}
-	if (ft_strcmp(argv[1], "julia") == 0)
+	if (ft_strcmp(argv[1], "julia") == 0 && argc == 4)
 	{
-		if (argc != 4)
-			return (0);
+		// if (argc != 4)
+		// 	return (0);
 		init_fractal(f, JULIA);
 		f->julia_c.r = ft_atof(argv[2]);
 		f->julia_c.i = ft_atof(argv[3]);
+		return (1);
+	}
+	if (ft_strcmp(argv[1], "tricorn") == 0 && argc == 2)
+	{
+		init_fractal(f, TRICORN);
 		return (1);
 	}
 	return (0);

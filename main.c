@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gkryszcz <gkryszcz@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ggrzesiek <ggrzesiek@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/17 12:37:32 by gkryszcz          #+#    #+#             */
-/*   Updated: 2025/10/11 12:45:01 by gkryszcz         ###   ########.fr       */
+/*   Updated: 2025/10/21 10:55:39 by ggrzesiek        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,12 +26,8 @@ void	init_fractal(t_fractal *f, int type)
 	f->offset_y = 0.0;
 	f->max_iter = MAX_ITER;
 	f->color_shift = 0;
-	if (type == JULIA)
-	{
-		f->julia_c.r = -0.7;
-		f->julia_c.i = 0.27015;
-	}
 }
+
 
 void	cleanup(t_fractal *f)
 {

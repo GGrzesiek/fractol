@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   fractol.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gkryszcz <gkryszcz@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ggrzesiek <ggrzesiek@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/04 14:36:41 by gkryszcz          #+#    #+#             */
-/*   Updated: 2025/10/11 12:41:39 by gkryszcz         ###   ########.fr       */
+/*   Updated: 2025/10/21 13:17:09 by ggrzesiek        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,9 +21,10 @@
 
 # define WIDTH 800
 # define HEIGHT 800
-# define MAX_ITER 100
+# define MAX_ITER 1000
 # define MANDELBROT 1
 # define JULIA 2
+# define TRICORN 3
 # define KEY_ESC 65307
 
 typedef struct s_complex
@@ -59,6 +60,7 @@ void			init_fractal(t_fractal *f, int type);
 int				parse_args(int argc, char **argv, t_fractal *f);
 int				mandelbrot(t_complex c, int max_iter);
 int				julia(t_complex z, t_complex c, int max_iter);
+int				tricorn(t_complex c, int max_iter);
 t_complex		map_pixel_to_complex(int x, int y, t_fractal *f);
 void			render_fractal(t_fractal *f);
 void			put_pixel(t_data *img, int x, int y, int color);

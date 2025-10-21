@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   fractal.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ggrzesiek <ggrzesiek@student.42.fr>        +#+  +:+       +#+        */
+/*   By: gkryszcz <gkryszcz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/10/07 14:52:56 by ggrzesiek         #+#    #+#             */
-/*   Updated: 2025/10/21 11:14:26 by ggrzesiek        ###   ########.fr       */
+/*   Created: 2025/10/07 14:52:56 by gkryszcz          #+#    #+#             */
+/*   Updated: 2025/10/21 13:24:17 by gkryszcz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,11 +51,11 @@ int	julia(t_complex z, t_complex c, int max_iter)
 	return (max_iter);
 }
 
-int tricorn(t_complex c, int max_iter)
+int	tricorn(t_complex c, int max_iter)
 {
-	t_complex z;
-	double temp;
-	int i;
+	t_complex	z;
+	double		temp;
+	int			i;
 
 	z.r = 0;
 	z.i = 0;
@@ -63,7 +63,7 @@ int tricorn(t_complex c, int max_iter)
 	while (i < max_iter)
 	{
 		if (z.r * z.r + z.i * z.i > 4.0)
-			return(i);
+			return (i);
 		temp = z.r * z.r - z.i * z.i + c.r;
 		z.i = -2.0 * z.r * z.i + c.i;
 		z.r = temp;

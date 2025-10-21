@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   render.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ggrzesiek <ggrzesiek@student.42.fr>        +#+  +:+       +#+        */
+/*   By: gkryszcz <gkryszcz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/10/07 14:46:47 by ggrzesiek         #+#    #+#             */
-/*   Updated: 2025/10/21 11:42:04 by ggrzesiek        ###   ########.fr       */
+/*   Created: 2025/10/07 14:46:47 by gkryszcz          #+#    #+#             */
+/*   Updated: 2025/10/21 13:23:46 by gkryszcz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,4 +82,3 @@ int	get_color(int iter, int max_iter, int shift)
 	b = (b + shift) % 256;
 	return (create_trgb(0, r, g, b));
 }
-

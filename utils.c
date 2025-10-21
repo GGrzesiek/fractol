@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ggrzesiek <ggrzesiek@student.42.fr>        +#+  +:+       +#+        */
+/*   By: gkryszcz <gkryszcz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/10/07 14:15:49 by ggrzesiek         #+#    #+#             */
-/*   Updated: 2025/10/21 11:32:59 by ggrzesiek        ###   ########.fr       */
+/*   Created: 2025/10/07 14:15:49 by gkryszcz          #+#    #+#             */
+/*   Updated: 2025/10/21 13:23:06 by gkryszcz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,8 +83,6 @@ int	parse_args(int argc, char **argv, t_fractal *f)
 	}
 	if (ft_strcmp(argv[1], "julia") == 0 && argc == 4)
 	{
-		// if (argc != 4)
-		// 	return (0);
 		init_fractal(f, JULIA);
 		f->julia_c.r = ft_atof(argv[2]);
 		f->julia_c.i = ft_atof(argv[3]);

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   fractol.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ggrzesiek <ggrzesiek@student.42.fr>        +#+  +:+       +#+        */
+/*   By: gkryszcz <gkryszcz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/04 14:36:41 by gkryszcz          #+#    #+#             */
-/*   Updated: 2025/10/21 13:17:09 by ggrzesiek        ###   ########.fr       */
+/*   Updated: 2025/10/21 13:19:55 by gkryszcz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@
 
 # define WIDTH 800
 # define HEIGHT 800
-# define MAX_ITER 1000
+# define MAX_ITER 100
 # define MANDELBROT 1
 # define JULIA 2
 # define TRICORN 3
